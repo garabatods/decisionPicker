@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Decision History</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#4849da",
+                        "outline": "#767586",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "on-tertiary-container": "#f0f9ff",
+                        "on-background": "#1b1b23",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#efecf9",
+                        "outline-variant": "#c7c4d7",
+                        "on-tertiary-fixed-variant": "#1e4c5f",
+                        "surface-dim": "#dbd8e5",
+                        "surface-container-low": "#f5f2fe",
+                        "primary": "#4343d5",
+                        "surface-bright": "#fcf8ff",
+                        "tertiary": "#335e72",
+                        "inverse-surface": "#302f39",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-container": "#1b7064",
+                        "surface": "#fcf8ff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-variant": "#e4e1ed",
+                        "secondary-fixed": "#a3f1e1",
+                        "inverse-primary": "#c1c1ff",
+                        "surface-container-high": "#e9e6f3",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-primary-fixed-variant": "#2e2bc2",
+                        "on-primary-container": "#faf7ff",
+                        "background": "#fcf8ff",
+                        "secondary-container": "#a3f1e1",
+                        "tertiary-container": "#4c778b",
+                        "primary-fixed": "#e1e0ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#bee9ff",
+                        "tertiary-fixed-dim": "#a1cde3",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f2effb",
+                        "on-tertiary-fixed": "#001f2a",
+                        "primary-container": "#5d5fef",
+                        "on-secondary-fixed": "#00201b",
+                        "secondary-fixed-dim": "#88d5c5",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#116a5e",
+                        "on-surface": "#1b1b23",
+                        "on-secondary-fixed-variant": "#005046"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-page": "24px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "stack-gap": "12px",
+                        "card-padding": "20px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Be Vietnam Pro"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md docked full-width top-0 sticky shadow-[0_4px_12px_rgba(93,95,239,0.05)] z-40">
+<div class="flex justify-between items-center w-full px-6 h-16">
+<button class="text-indigo-600 dark:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors p-2 rounded-full active:scale-95 transition-transform duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-black text-indigo-600 dark:text-indigo-400 font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight">Decide Joyfully</h1>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="px-margin-page pt-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-h1 text-h1 text-on-background">History</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Your past choices.</p>
+</div>
+<button class="font-label-caps text-label-caps text-primary hover:text-primary-container transition-colors pb-1">
+                CLEAR ALL
+            </button>
+</div>
+<!-- Scannable List -->
+<div class="flex flex-col gap-stack-gap">
+<!-- Latest Highlight Card -->
+<div class="bg-primary-container text-on-primary-container rounded-[24px] p-card-padding shadow-[0_8px_24px_rgba(93,95,239,0.15)] flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl pointer-events-none"></div>
+<div class="flex justify-between items-start z-10">
+<div class="flex items-center gap-2 bg-white/20 px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+<span class="font-label-caps text-[10px] tracking-wider uppercase">Food Picker</span>
+</div>
+<span class="font-label-caps text-[10px] opacity-80 uppercase">Just now</span>
+</div>
+<div class="z-10 mt-2">
+<h3 class="font-h1 text-[28px] leading-tight">Sushi</h3>
+<p class="font-body-md text-sm opacity-90 mt-1">Resolved instantly.</p>
+</div>
+</div>
+<!-- Standard List Card -->
+<div class="bg-surface rounded-[24px] p-card-padding shadow-[0_4px_12px_rgba(0,0,0,0.03)] flex items-center justify-between hover:-translate-y-0.5 transition-transform duration-200 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-[16px] bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined fill">movie</span>
+</div>
+<div class="flex flex-col">
+<span class="font-h2 text-[20px] text-on-background">Sci-Fi Movie</span>
+<span class="font-body-md text-sm text-outline">Movie Night</span>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="font-label-caps text-outline uppercase">2 hrs ago</span>
+</div>
+</div>
+<!-- Standard List Card -->
+<div class="bg-surface rounded-[24px] p-card-padding shadow-[0_4px_12px_rgba(0,0,0,0.03)] flex items-center justify-between hover:-translate-y-0.5 transition-transform duration-200 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-[16px] bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined fill">hiking</span>
+</div>
+<div class="flex flex-col">
+<span class="font-h2 text-[20px] text-on-background">Mountain Trail</span>
+<span class="font-body-md text-sm text-outline">Weekend Activity</span>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="font-label-caps text-outline uppercase">Yesterday</span>
+</div>
+</div>
+<!-- Standard List Card -->
+<div class="bg-surface rounded-[24px] p-card-padding shadow-[0_4px_12px_rgba(0,0,0,0.03)] flex items-center justify-between hover:-translate-y-0.5 transition-transform duration-200 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-[16px] bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined fill">music_note</span>
+</div>
+<div class="flex flex-col">
+<span class="font-h2 text-[20px] text-on-background">Jazz Playlist</span>
+<span class="font-body-md text-sm text-outline">Work Music</span>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="font-label-caps text-outline uppercase">3 days ago</span>
+</div>
+</div>
+<!-- Standard List Card -->
+<div class="bg-surface rounded-[24px] p-card-padding shadow-[0_4px_12px_rgba(0,0,0,0.03)] flex items-center justify-between hover:-translate-y-0.5 transition-transform duration-200 cursor-pointer opacity-70">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-[16px] bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined fill">flight</span>
+</div>
+<div class="flex flex-col">
+<span class="font-h2 text-[20px] text-on-background">Tokyo</span>
+<span class="font-body-md text-sm text-outline">Vacation Destination</span>
+</div>
+</div>
+<div class="text-right flex flex-col items-end">
+<span class="font-label-caps text-outline uppercase">Last week</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg fixed bottom-0 w-full rounded-t-[24px] border-t border-slate-100 dark:border-slate-800 shadow-[0_-8px_20px_rgba(0,0,0,0.03)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-6">
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-indigo-500 transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-indigo-500 transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16">
+<span class="material-symbols-outlined text-[24px]">grid_view</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">My Groups</span>
+</button>
+<!-- Active Tab -->
+<button class="flex flex-col items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold scale-110 transition-all hover:text-indigo-500 transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16">
+<span class="material-symbols-outlined fill text-[24px]">history</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">History</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-indigo-500 transition-colors active:scale-90 transition-transform duration-150 gap-1 w-16">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Settings</span>
+</button>
+</nav>
+</body></html>

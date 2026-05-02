@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Decide Joyfully</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#07006c",
+                        "surface-container": "#efecf9",
+                        "tertiary-fixed": "#bee9ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary-container": "#faf7ff",
+                        "inverse-primary": "#c1c1ff",
+                        "on-secondary-fixed-variant": "#005046",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#2e2bc2",
+                        "surface-tint": "#4849da",
+                        "surface-container-low": "#f5f2fe",
+                        "on-surface": "#1b1b23",
+                        "surface-variant": "#e4e1ed",
+                        "on-tertiary-fixed": "#001f2a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fcf8ff",
+                        "on-tertiary-fixed-variant": "#1e4c5f",
+                        "surface-dim": "#dbd8e5",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#f0f9ff",
+                        "on-secondary-fixed": "#00201b",
+                        "on-background": "#1b1b23",
+                        "inverse-on-surface": "#f2effb",
+                        "on-primary": "#ffffff",
+                        "secondary": "#116a5e",
+                        "primary-fixed": "#e1e0ff",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#5d5fef",
+                        "secondary-fixed": "#a3f1e1",
+                        "tertiary-container": "#4c778b",
+                        "on-surface-variant": "#464555",
+                        "secondary-fixed-dim": "#88d5c5",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#a1cde3",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "inverse-surface": "#302f39",
+                        "surface-container-high": "#e9e6f3",
+                        "tertiary": "#335e72",
+                        "outline-variant": "#c7c4d7",
+                        "outline": "#767586",
+                        "secondary-container": "#a3f1e1",
+                        "primary": "#4343d5",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-error-container": "#93000a",
+                        "background": "#fcf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#1b7064"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card": "24px"
+                    },
+                    spacing: {
+                        "margin-page": "24px",
+                        "stack-gap": "12px",
+                        "gutter": "16px",
+                        "card-padding": "20px",
+                        "unit": "4px",
+                        "nav-bottom": "80px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }]
+                    },
+                    boxShadow: {
+                        'ambient-1': '0 4px 12px rgba(67, 67, 213, 0.05)',
+                        'ambient-2': '0 8px 20px rgba(67, 67, 213, 0.1)',
+                        'fab': '0 8px 24px rgba(93, 95, 239, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased pb-nav-bottom">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky bg-white/80 dark:bg-slate-900/80 backdrop-blur-md none shadow-[0_4px_12px_rgba(93,95,239,0.05)] flex justify-between items-center w-full px-6 h-16 z-40">
+<button class="hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 transition-transform duration-200 p-2 -ml-2 rounded-full text-indigo-600 dark:text-indigo-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-indigo-600 dark:text-indigo-400 text-xl font-black">Decide Joyfully</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border-2 border-surface-container-highest cursor-pointer hover:opacity-90 transition-opacity">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A brightly lit, closely cropped portrait of a joyful young woman. The lighting is soft and high-key, complementing the minimal, optimistic aesthetic of the UI. She has a warm, relaxed smile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQDqnfcVru62pVS_6fIsz5r1V2qQBZh_mEklMeXvV3WMyE1Fm7RNsT57XXAVBs0q72ND5BWhZ2gtwBaoH5c8jrOmIxN9ifcv_bhb9X-jiM4-5kXmDbM6Nni7lQx4S-T69iyIByf-dLkoLPBgkE_qNfsc8li4pLGYwcyAx2dMk1z942cLldB0QZYX1uvfYxXnEsuusqreSJVF7HVpwo2u5yUqzIiSzasIxe_myOm11PYaj4nv-AGy_wQ5ZDmknvvPRNSraJ3RSllUuI"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="px-margin-page pt-gutter pb-32">
+<h2 class="font-h2 text-h2 text-on-surface mb-gutter">Choose a Vibe</h2>
+<div class="flex flex-col gap-gutter">
+<!-- Card 1: Food Picker -->
+<button class="w-full text-left bg-surface rounded-card p-card-padding shadow-ambient-1 hover:shadow-ambient-2 transition-all active:scale-[0.98] relative overflow-hidden group">
+<div class="absolute inset-0 bg-secondary-container opacity-20 pointer-events-none"></div>
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 rounded-full bg-secondary-fixed flex items-center justify-center text-3xl shadow-sm shrink-0">
+                        🍕
+                    </div>
+<div class="flex-1">
+<h3 class="font-h2 text-h2 text-on-surface mb-1">Food Picker</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Let us pick dinner for you</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors self-center">chevron_right</span>
+</div>
+</button>
+<!-- Card 2: Movie Genre -->
+<button class="w-full text-left bg-surface rounded-card p-card-padding shadow-ambient-1 hover:shadow-ambient-2 transition-all active:scale-[0.98] relative overflow-hidden group">
+<div class="absolute inset-0 bg-tertiary-container opacity-10 pointer-events-none"></div>
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 rounded-full bg-tertiary-fixed flex items-center justify-center text-3xl shadow-sm shrink-0">
+                        🎬
+                    </div>
+<div class="flex-1">
+<h3 class="font-h2 text-h2 text-on-surface mb-1">Movie Genre Picker</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Spin for a movie vibe</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors self-center">chevron_right</span>
+</div>
+</button>
+<!-- Card 3: Truth or Dare -->
+<button class="w-full text-left bg-surface rounded-card p-card-padding shadow-ambient-1 hover:shadow-ambient-2 transition-all active:scale-[0.98] relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary-container opacity-10 pointer-events-none"></div>
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center text-3xl shadow-sm shrink-0">
+                        🎲
+                    </div>
+<div class="flex-1">
+<h3 class="font-h2 text-h2 text-on-surface mb-1">Truth or Dare</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Start the party games</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors self-center">chevron_right</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button aria-label="Create New Group" class="fixed bottom-[96px] right-margin-page w-[64px] h-[64px] bg-primary text-on-primary rounded-full shadow-fab flex items-center justify-center hover:bg-surface-tint active:scale-95 transition-all z-40">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full rounded-t-[24px] border-t border-slate-100 dark:border-slate-800 border-t border-slate-100 dark:border-slate-800 shadow-[0_-8px_20px_rgba(0,0,0,0.03)] fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-3 pb-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg md:hidden">
+<button class="hover:text-indigo-500 transition-colors active:scale-90 transition-transform duration-150 flex flex-col items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold scale-110 transition-all">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Explore</span>
+</button>
+<button class="hover:text-indigo-500 transition-colors active:scale-90 transition-transform duration-150 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">grid_view</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">My Groups</span>
+</button>
+<button class="hover:text-indigo-500 transition-colors active:scale-90 transition-transform duration-150 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px]">Settings</span>
+</button>
+</nav>
+</body></html>

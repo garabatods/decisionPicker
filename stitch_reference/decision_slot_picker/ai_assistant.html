@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Magic Fill - Decide Joyfully</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#f5f2fe",
+                    "on-tertiary-container": "#f0f9ff",
+                    "inverse-on-surface": "#f2effb",
+                    "on-secondary-fixed-variant": "#005046",
+                    "inverse-surface": "#302f39",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#dbd8e5",
+                    "on-primary-container": "#faf7ff",
+                    "tertiary-fixed-dim": "#a1cde3",
+                    "on-surface": "#1b1b23",
+                    "outline-variant": "#c7c4d7",
+                    "secondary-container": "#a3f1e1",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#5d5fef",
+                    "on-primary": "#ffffff",
+                    "background": "#fcf8ff",
+                    "secondary": "#116a5e",
+                    "surface-container": "#efecf9",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#e9e6f3",
+                    "on-secondary-fixed": "#00201b",
+                    "inverse-primary": "#c1c1ff",
+                    "surface-variant": "#e4e1ed",
+                    "on-tertiary-fixed-variant": "#1e4c5f",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed": "#a3f1e1",
+                    "surface-container-highest": "#e4e1ed",
+                    "secondary-fixed-dim": "#88d5c5",
+                    "on-surface-variant": "#464555",
+                    "surface-bright": "#fcf8ff",
+                    "on-primary-fixed-variant": "#2e2bc2",
+                    "primary": "#4343d5",
+                    "tertiary-fixed": "#bee9ff",
+                    "on-error-container": "#93000a",
+                    "on-background": "#1b1b23",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#4c778b",
+                    "on-secondary-container": "#1b7064",
+                    "primary-fixed": "#e1e0ff",
+                    "outline": "#767586",
+                    "on-tertiary-fixed": "#001f2a",
+                    "primary-fixed-dim": "#c1c1ff",
+                    "surface-tint": "#4849da",
+                    "surface": "#fcf8ff",
+                    "on-primary-fixed": "#07006c",
+                    "tertiary": "#335e72"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-gap": "12px",
+                    "gutter": "16px",
+                    "margin-page": "24px",
+                    "card-padding": "20px",
+                    "unit": "4px"
+            },
+            "fontFamily": {
+                    "body-lg": [
+                            "Be Vietnam Pro"
+                    ],
+                    "label-caps": [
+                            "Be Vietnam Pro"
+                    ],
+                    "body-md": [
+                            "Be Vietnam Pro"
+                    ],
+                    "h2": [
+                            "Plus Jakarta Sans"
+                    ],
+                    "h1": [
+                            "Plus Jakarta Sans"
+                    ]
+            },
+            "fontSize": {
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "h2": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "h1": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar (Transactional Screen - Keeps TopNav, no BottomNav) -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_4px_12px_rgba(93,95,239,0.05)] docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-6 h-16">
+<button class="text-indigo-600 dark:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 transition-transform duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-indigo-600 dark:text-indigo-400">Magic Fill</h1>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden shadow-sm">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A close up portrait of a young woman with a friendly smile, brightly lit against a neutral background. The lighting is soft and flattering, creating a warm and approachable mood. The image is framed as a circular avatar, consistent with a modern UI design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBQ6igSa4mT-T81BFJx_pNRls1ftCft3LzEXd6wVgJYy1sjEF6YbxywqzvBWZhlBQrHXcJZq-kEWVuJ4gRuOOmcs142xmcyBoIrblgUR5My_3k8fJSJtjiu80AuNzGUW45TnyrCB-__Wg66UI5q-dkR1sDZJxfLb1DMcab2kPtpgAXKpm9hsmmnc1CN2RUA8qEVOLocg5q9HUQYVUOfR88XAUZ62V8w1ifpoIXjyMDk-Hyh4E47rcMGLooSGsLKqcgLBNomGMDDbn7"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-margin-page py-8 flex flex-col gap-8 max-w-2xl mx-auto w-full">
+<!-- Input Section -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-2xl">auto_awesome</span>
+<h2 class="font-h2 text-h2 text-on-background">Tell me what you need</h2>
+</div>
+<div class="relative">
+<textarea class="w-full h-40 p-card-padding rounded-[24px] bg-surface-container border-none focus:ring-2 focus:ring-primary focus:bg-surface resize-none text-body-lg font-body-lg text-on-surface shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)] transition-colors placeholder:text-outline" placeholder="e.g., Lunch at work near the office..."></textarea>
+</div>
+<button class="self-end bg-primary text-on-primary px-8 py-4 rounded-[24px] font-bold text-lg flex items-center gap-3 shadow-[0_8px_20px_rgba(67,67,213,0.2)] hover:shadow-[0_12px_24px_rgba(67,67,213,0.3)] active:scale-95 transition-all w-full md:w-auto justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                Magic Fill
+            </button>
+</section>
+<!-- Suggestions Section -->
+<section class="flex flex-col gap-stack-gap mt-4">
+<h3 class="font-body-lg text-body-lg font-bold text-on-surface-variant mb-2">Suggestions</h3>
+<div class="flex flex-col gap-4">
+<!-- Suggestion Card 1 -->
+<div class="bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] flex items-center justify-between border border-transparent hover:border-primary-fixed transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#fdf2f8] flex items-center justify-center text-[#be185d]">
+<span class="material-symbols-outlined text-2xl">local_pizza</span>
+</div>
+<div>
+<h4 class="font-bold text-lg text-on-surface">Joe's Pizza</h4>
+<p class="text-on-surface-variant text-sm">Casual • $</p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+<!-- Checkmark would go here when active -->
+</div>
+</div>
+<!-- Suggestion Card 2 (Active State Example) -->
+<div class="bg-primary-fixed p-card-padding rounded-[24px] shadow-[0_8px_20px_rgba(67,67,213,0.1)] flex items-center justify-between border-2 border-primary transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl">eco</span>
+</div>
+<div>
+<h4 class="font-bold text-lg text-on-surface">Green Salad Co.</h4>
+<p class="text-on-surface-variant text-sm">Healthy • $$</p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Suggestion Card 3 -->
+<div class="bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] flex items-center justify-between border border-transparent hover:border-primary-fixed transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#fffbeb] flex items-center justify-center text-[#b45309]">
+<span class="material-symbols-outlined text-2xl">tapas</span>
+</div>
+<div>
+<h4 class="font-bold text-lg text-on-surface">Taco Truck</h4>
+<p class="text-on-surface-variant text-sm">Quick Bite • $</p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center group-hover:border-primary transition-colors">
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full p-6 bg-gradient-to-t from-background via-background to-transparent z-40 pb-8">
+<div class="max-w-2xl mx-auto">
+<button class="w-full bg-secondary text-on-secondary py-5 rounded-full font-h2 text-body-lg shadow-[0_8px_20px_rgba(17,106,94,0.2)] hover:shadow-[0_12px_24px_rgba(17,106,94,0.3)] active:scale-95 transition-all flex justify-center items-center gap-2">
+                Create Group with Picks
+                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</body></html>

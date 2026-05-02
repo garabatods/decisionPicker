@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Group Details - Food Picker</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-tint": "#4849da",
+                        "outline": "#767586",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "on-tertiary-container": "#f0f9ff",
+                        "on-background": "#1b1b23",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#efecf9",
+                        "outline-variant": "#c7c4d7",
+                        "on-tertiary-fixed-variant": "#1e4c5f",
+                        "surface-dim": "#dbd8e5",
+                        "surface-container-low": "#f5f2fe",
+                        "primary": "#4343d5",
+                        "surface-bright": "#fcf8ff",
+                        "tertiary": "#335e72",
+                        "inverse-surface": "#302f39",
+                        "on-surface-variant": "#464555",
+                        "on-secondary-container": "#1b7064",
+                        "surface": "#fcf8ff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-variant": "#e4e1ed",
+                        "secondary-fixed": "#a3f1e1",
+                        "inverse-primary": "#c1c1ff",
+                        "surface-container-high": "#e9e6f3",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-primary-fixed-variant": "#2e2bc2",
+                        "on-primary-container": "#faf7ff",
+                        "background": "#fcf8ff",
+                        "secondary-container": "#a3f1e1",
+                        "tertiary-container": "#4c778b",
+                        "primary-fixed": "#e1e0ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#bee9ff",
+                        "tertiary-fixed-dim": "#a1cde3",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#f2effb",
+                        "on-tertiary-fixed": "#001f2a",
+                        "primary-container": "#5d5fef",
+                        "on-secondary-fixed": "#00201b",
+                        "secondary-fixed-dim": "#88d5c5",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#116a5e",
+                        "on-surface": "#1b1b23",
+                        "on-secondary-fixed-variant": "#005046"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-page": "24px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "stack-gap": "12px",
+                        "card-padding": "20px"
+                    },
+                    fontFamily: {
+                        "label-caps": ["Be Vietnam Pro"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "h2": ["Plus Jakarta Sans"],
+                        "body-lg": ["Be Vietnam Pro"]
+                    },
+                    fontSize: {
+                        "label-caps": ["12px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "700" }],
+                        "h1": ["32px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+                        "h2": ["24px", { lineHeight: "1.3", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "1.5", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen relative font-body-md">
+<!-- TopAppBar from JSON -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md docked full-width top-0 sticky shadow-[0_4px_12px_rgba(93,95,239,0.05)] flex justify-between items-center w-full px-6 h-16 z-50">
+<button class="text-indigo-600 dark:text-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-200 flex items-center justify-center w-10 h-10 rounded-full">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<span class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-indigo-600 dark:text-indigo-400">Decide Joyfully</span>
+<button class="hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-200 flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-low text-primary">
+<span class="material-symbols-outlined">person</span>
+</button>
+</nav>
+<!-- Main Canvas -->
+<main class="w-full max-w-md mx-auto relative pb-32">
+<!-- Hero Section: Group Identity -->
+<header class="px-margin-page pt-8 pb-10 flex flex-col items-center justify-center text-center">
+<div class="relative w-28 h-28 mb-6">
+<div class="absolute inset-0 bg-secondary-container rounded-[32px] rotate-3 shadow-[0_12px_24px_rgba(163,241,225,0.3)]"></div>
+<div class="absolute inset-0 bg-surface-container-lowest rounded-[32px] flex items-center justify-center -rotate-3 transition-transform duration-300 hover:rotate-0 shadow-sm border border-surface-variant">
+<span class="material-symbols-outlined text-[56px] text-secondary" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+</div>
+<h1 class="font-h1 text-h1 text-on-background mb-3">Food Picker</h1>
+<div class="flex items-center gap-2 bg-surface-variant px-4 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">4 CHOICES ACTIVE</span>
+</div>
+</header>
+<!-- Choices Grid (Bento Style) -->
+<section class="px-margin-page flex flex-col gap-stack-gap">
+<!-- Choice Card 1 -->
+<article class="group bg-surface-container-lowest rounded-[24px] p-card-padding flex items-center justify-between shadow-[0_4px_12px_rgba(67,67,213,0.03)] hover:shadow-[0_8px_20px_rgba(67,67,213,0.08)] transition-all duration-300 border border-transparent hover:border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-[16px] bg-[#fff5f5] flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px] text-[#ff6b6b]" style="font-variation-settings: 'FILL' 1;">local_pizza</span>
+</div>
+<span class="font-h2 text-[20px] text-on-background">Pizza</span>
+</div>
+<div class="flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+<button class="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-variant flex items-center justify-center text-on-surface-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-[#fff5f5] hover:bg-error-container flex items-center justify-center text-[#ff6b6b] hover:text-error transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</article>
+<!-- Choice Card 2 -->
+<article class="group bg-surface-container-lowest rounded-[24px] p-card-padding flex items-center justify-between shadow-[0_4px_12px_rgba(67,67,213,0.03)] hover:shadow-[0_8px_20px_rgba(67,67,213,0.08)] transition-all duration-300 border border-transparent hover:border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-[16px] bg-[#f0f9ff] flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px] text-[#339af0]" style="font-variation-settings: 'FILL' 1;">set_meal</span>
+</div>
+<span class="font-h2 text-[20px] text-on-background">Sushi</span>
+</div>
+<div class="flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+<button class="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-variant flex items-center justify-center text-on-surface-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-[#fff5f5] hover:bg-error-container flex items-center justify-center text-[#ff6b6b] hover:text-error transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</article>
+<!-- Choice Card 3 -->
+<article class="group bg-surface-container-lowest rounded-[24px] p-card-padding flex items-center justify-between shadow-[0_4px_12px_rgba(67,67,213,0.03)] hover:shadow-[0_8px_20px_rgba(67,67,213,0.08)] transition-all duration-300 border border-transparent hover:border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-[16px] bg-[#fff9db] flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px] text-[#fcc419]" style="font-variation-settings: 'FILL' 1;">lunch_dining</span>
+</div>
+<span class="font-h2 text-[20px] text-on-background">Burgers</span>
+</div>
+<div class="flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+<button class="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-variant flex items-center justify-center text-on-surface-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-[#fff5f5] hover:bg-error-container flex items-center justify-center text-[#ff6b6b] hover:text-error transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</article>
+<!-- Choice Card 4 -->
+<article class="group bg-surface-container-lowest rounded-[24px] p-card-padding flex items-center justify-between shadow-[0_4px_12px_rgba(67,67,213,0.03)] hover:shadow-[0_8px_20px_rgba(67,67,213,0.08)] transition-all duration-300 border border-transparent hover:border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-14 h-14 rounded-[16px] bg-[#ebfbee] flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px] text-[#51cf66]" style="font-variation-settings: 'FILL' 1;">tapas</span>
+</div>
+<span class="font-h2 text-[20px] text-on-background">Tacos</span>
+</div>
+<div class="flex gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+<button class="w-10 h-10 rounded-full bg-surface-container hover:bg-surface-variant flex items-center justify-center text-on-surface-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="w-10 h-10 rounded-full bg-[#fff5f5] hover:bg-error-container flex items-center justify-center text-[#ff6b6b] hover:text-error transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</article>
+<!-- Add New Choice Button -->
+<button class="w-full py-5 rounded-[24px] border-2 border-dashed border-outline-variant hover:border-primary hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center gap-2 text-on-surface-variant hover:text-primary mt-2 group active:scale-[0.98]">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">add</span>
+<span class="font-h2 text-[18px]">Add Choice</span>
+</button>
+</section>
+</main>
+<!-- Sticky Bottom Action Area -->
+<div class="fixed bottom-0 left-0 w-full z-40 bg-gradient-to-t from-background via-background/95 to-transparent pt-12 pb-8 px-margin-page flex justify-center pointer-events-none">
+<div class="w-full max-w-md pointer-events-auto">
+<button class="w-full h-[64px] bg-primary text-on-primary rounded-full font-h2 text-[20px] shadow-[0_8px_24px_rgba(67,67,213,0.3)] hover:shadow-[0_12px_32px_rgba(67,67,213,0.4)] flex items-center justify-center gap-3 active:scale-[0.97] transition-all duration-200">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">casino</span>
+                Spin Now
+            </button>
+</div>
+</div>
+</body></html>

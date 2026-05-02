@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Decision Group</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#07006c",
+                        "surface-container": "#efecf9",
+                        "tertiary-fixed": "#bee9ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary-container": "#faf7ff",
+                        "inverse-primary": "#c1c1ff",
+                        "on-secondary-fixed-variant": "#005046",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#2e2bc2",
+                        "surface-tint": "#4849da",
+                        "surface-container-low": "#f5f2fe",
+                        "on-surface": "#1b1b23",
+                        "surface-variant": "#e4e1ed",
+                        "on-tertiary-fixed": "#001f2a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fcf8ff",
+                        "on-tertiary-fixed-variant": "#1e4c5f",
+                        "surface-dim": "#dbd8e5",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#f0f9ff",
+                        "on-secondary-fixed": "#00201b",
+                        "on-background": "#1b1b23",
+                        "inverse-on-surface": "#f2effb",
+                        "on-primary": "#ffffff",
+                        "secondary": "#116a5e",
+                        "primary-fixed": "#e1e0ff",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#5d5fef",
+                        "secondary-fixed": "#a3f1e1",
+                        "tertiary-container": "#4c778b",
+                        "on-surface-variant": "#464555",
+                        "secondary-fixed-dim": "#88d5c5",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#a1cde3",
+                        "primary-fixed-dim": "#c1c1ff",
+                        "inverse-surface": "#302f39",
+                        "surface-container-high": "#e9e6f3",
+                        "tertiary": "#335e72",
+                        "outline-variant": "#c7c4d7",
+                        "outline": "#767586",
+                        "secondary-container": "#a3f1e1",
+                        "primary": "#4343d5",
+                        "surface-container-highest": "#e4e1ed",
+                        "on-error-container": "#93000a",
+                        "background": "#fcf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#1b7064"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card": "24px",
+                        "input": "16px"
+                    },
+                    "spacing": {
+                        "margin-page": "24px",
+                        "stack-gap": "12px",
+                        "gutter": "16px",
+                        "card-padding": "20px",
+                        "unit": "4px",
+                        "input-height": "56px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Be Vietnam Pro"],
+                        "body-lg": ["Be Vietnam Pro"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "h1": ["Plus Jakarta Sans"],
+                        "h2": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        "level-1": "0 4px 12px rgba(67, 67, 213, 0.05)",
+                        "level-2": "0 8px 20px rgba(67, 67, 213, 0.1)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen font-body-md text-body-md antialiased pb-[100px]">
+<!-- TopAppBar Semantic Mapping: Task-Focused (Close/Back). Suppressing bottom nav. -->
+<header class="bg-white/80 backdrop-blur-md text-primary font-h2 h-16 flex justify-between items-center w-full px-6 sticky top-0 full-width shadow-[0_4px_12px_rgba(93,95,239,0.05)] z-40">
+<button class="text-primary hover:bg-slate-50 transition-colors rounded-full p-2 active:scale-95 duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-black tracking-tight flex-1 text-center pr-8">Create Group</h1>
+</header>
+<main class="px-margin-page py-gutter max-w-2xl mx-auto flex flex-col gap-[32px]">
+<section class="flex flex-col gap-stack-gap">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="groupName">Group Name</label>
+<input class="w-full h-input-height bg-surface-container rounded-input border-none text-on-surface placeholder:text-outline px-card-padding focus:ring-2 focus:ring-primary shadow-inner" id="groupName" placeholder="e.g., Weekend Plans" type="text"/>
+</section>
+<section class="flex flex-col gap-gutter">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Choices</label>
+<div class="flex flex-col gap-unit">
+<!-- Choice Item -->
+<div class="flex items-center justify-between bg-surface-container-highest rounded-input h-[56px] px-card-padding shadow-level-1">
+<span class="font-body-md text-body-md text-on-surface">Pizza</span>
+<button aria-label="Delete Pizza" class="text-outline hover:text-error transition-colors active:scale-90">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Choice Item -->
+<div class="flex items-center justify-between bg-surface-container-highest rounded-input h-[56px] px-card-padding shadow-level-1">
+<span class="font-body-md text-body-md text-on-surface">Sushi</span>
+<button aria-label="Delete Sushi" class="text-outline hover:text-error transition-colors active:scale-90">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<!-- Add Choice Button -->
+<button class="flex items-center justify-center gap-2 h-input-height w-full bg-secondary-container text-on-secondary-container rounded-input font-body-lg text-body-lg font-bold shadow-level-1 hover:shadow-level-2 active:scale-95 transition-all mt-unit">
+<span class="material-symbols-outlined">add</span>
+                Add Choice
+            </button>
+</section>
+</main>
+<!-- Fixed Bottom Action -->
+<div class="fixed bottom-0 left-0 w-full px-margin-page pb-margin-page pt-gutter bg-gradient-to-t from-background to-transparent z-30">
+<button class="w-full h-[64px] bg-primary text-on-primary rounded-full font-h2 text-h2 shadow-level-2 active:scale-95 transition-all flex items-center justify-center max-w-2xl mx-auto">
+            Save Group
+        </button>
+</div>
+</body></html>
