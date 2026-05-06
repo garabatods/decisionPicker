@@ -11,7 +11,11 @@ class DecisionRepository {
   List<DecisionGroup> loadGroups() {
     final customGroups = _storage.loadCustomGroups()
       ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
-    final groups = [...customGroups, ...defaultDecisionGroups];
+    final savedGroupIds = customGroups.map((group) => group.id).toSet();
+    final availableDefaults = defaultDecisionGroups
+        .where((group) => !savedGroupIds.contains(group.id))
+        .toList();
+    final groups = [...customGroups, ...availableDefaults];
     final order = _storage.loadGroupOrder();
     if (order.isEmpty) {
       return groups;

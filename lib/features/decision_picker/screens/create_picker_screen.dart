@@ -4,11 +4,15 @@ import 'package:go_router/go_router.dart';
 import '../../../../app.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../models/decision_group.dart';
 import '../widgets/brand_top_bar.dart';
 import '../widgets/choice_input_row.dart';
+import '../widgets/empty_state.dart';
 
 class CreatePickerScreen extends StatefulWidget {
-  const CreatePickerScreen({super.key});
+  const CreatePickerScreen({super.key, this.groupId});
+
+  final String? groupId;
 
   @override
   State<CreatePickerScreen> createState() => _CreatePickerScreenState();
@@ -27,17 +31,34 @@ class _CreatePickerScreenState extends State<CreatePickerScreen> {
   final List<FocusNode> _choiceFocusNodes = [FocusNode(), FocusNode()];
   final List<GlobalKey> _choiceKeys = [GlobalKey(), GlobalKey()];
   final GlobalKey _addChoiceKey = GlobalKey();
+  bool _loadedExistingPicker = false;
+  bool _isPopulatingFields = false;
+
+  bool get _isEditing => widget.groupId != null;
 
   @override
   void initState() {
     super.initState();
     _nameController.addListener(_refresh);
     _emojiController.addListener(_refresh);
-    for (final controller in _choiceControllers) {
-      controller.addListener(_refresh);
+    for (var index = 0; index < _choiceControllers.length; index++) {
+      _attachChoiceField(index);
     }
-    for (final focusNode in _choiceFocusNodes) {
-      focusNode.addListener(() => _handleChoiceFocusChange(focusNode));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_isEditing || _loadedExistingPicker) {
+      return;
+    }
+
+    _loadedExistingPicker = true;
+    final group = DecisionGroupsScope.of(context).findById(widget.groupId!);
+    if (group != null) {
+      _isPopulatingFields = true;
+      _loadExistingGroup(group);
+      _isPopulatingFields = false;
     }
   }
 
@@ -95,19 +116,57 @@ class _CreatePickerScreenState extends State<CreatePickerScreen> {
   }
 
   void _refresh() {
+    if (_isPopulatingFields) {
+      return;
+    }
     setState(() {});
+  }
+
+  void _attachChoiceField(int index) {
+    _choiceControllers[index].addListener(_refresh);
+    final focusNode = _choiceFocusNodes[index];
+    focusNode.addListener(() => _handleChoiceFocusChange(focusNode));
+  }
+
+  void _loadExistingGroup(DecisionGroup group) {
+    _nameController.text = group.name;
+    _emojiController.text = group.emoji;
+
+    final choices = group.choices.length >= 2
+        ? group.choices
+        : [...group.choices, ...List.filled(2 - group.choices.length, '')];
+
+    for (final controller in _choiceControllers) {
+      controller.dispose();
+    }
+    for (final focusNode in _choiceFocusNodes) {
+      focusNode.dispose();
+    }
+
+    _choiceControllers
+      ..clear()
+      ..addAll(choices.map((choice) => TextEditingController(text: choice)));
+    _choiceFocusNodes
+      ..clear()
+      ..addAll(List.generate(choices.length, (_) => FocusNode()));
+    _choiceKeys
+      ..clear()
+      ..addAll(List.generate(choices.length, (_) => GlobalKey()));
+
+    for (var index = 0; index < _choiceControllers.length; index++) {
+      _attachChoiceField(index);
+    }
   }
 
   void _addChoice() {
     final nextIndex = _choiceControllers.length;
     setState(() {
       final controller = TextEditingController();
-      controller.addListener(_refresh);
       _choiceControllers.add(controller);
       final focusNode = FocusNode();
-      focusNode.addListener(() => _handleChoiceFocusChange(focusNode));
       _choiceFocusNodes.add(focusNode);
       _choiceKeys.add(GlobalKey());
+      _attachChoiceField(nextIndex);
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -187,23 +246,54 @@ class _CreatePickerScreenState extends State<CreatePickerScreen> {
     }
 
     final controller = DecisionGroupsScope.of(context);
-    await controller.addCustomGroup(
-      name: _nameController.text,
-      emoji: _emojiController.text,
-      choices: _validChoices,
-    );
+    final groupId = widget.groupId;
+    if (groupId == null) {
+      await controller.addCustomGroup(
+        name: _nameController.text,
+        emoji: _emojiController.text,
+        choices: _validChoices,
+      );
+    } else {
+      await controller.updateCustomGroup(
+        id: groupId,
+        name: _nameController.text,
+        emoji: _emojiController.text,
+        choices: _validChoices,
+      );
+    }
 
     if (mounted) {
-      context.go('/');
+      if (groupId == null) {
+        context.go('/');
+      } else {
+        context.go('/group/$groupId');
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_isEditing) {
+      final group = DecisionGroupsScope.of(context).findById(widget.groupId!);
+      if (group == null) {
+        return const Scaffold(
+          appBar: BrandTopBar(title: 'Edit Picker', showBack: true),
+          body: SafeArea(
+            child: EmptyState(
+              icon: Icons.edit_off,
+              title: 'Picker not found',
+              message: 'That picker may have been deleted.',
+            ),
+          ),
+        );
+      }
+    }
+
     final validationMessage = _validationMessage;
+    final title = _isEditing ? 'Edit Picker' : 'Create Picker';
 
     return Scaffold(
-      appBar: const BrandTopBar(title: 'Create Picker', showBack: true),
+      appBar: BrandTopBar(title: title, showBack: true),
       bottomNavigationBar: AnimatedPadding(
         duration: const Duration(milliseconds: 180),
         curve: Curves.easeOut,
@@ -240,7 +330,7 @@ class _CreatePickerScreenState extends State<CreatePickerScreen> {
                 ],
                 FilledButton(
                   onPressed: _canSave ? _save : null,
-                  child: const Text('Save picker'),
+                  child: Text(_isEditing ? 'Save changes' : 'Save picker'),
                 ),
               ],
             ),

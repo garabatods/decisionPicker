@@ -29,6 +29,13 @@ class _DecisionMakerAppState extends State<DecisionMakerApp> {
         builder: (context, state) => const CreatePickerScreen(),
       ),
       GoRoute(
+        path: '/edit/:id',
+        builder: (context, state) {
+          final groupId = state.pathParameters['id'] ?? '';
+          return CreatePickerScreen(groupId: groupId);
+        },
+      ),
+      GoRoute(
         path: '/ai',
         builder: (context, state) => const AiAssistantScreen(),
       ),

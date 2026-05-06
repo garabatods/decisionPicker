@@ -110,6 +110,85 @@ void main() {
     controller.dispose();
   });
 
+  testWidgets('edit picker updates an existing custom picker', (tester) async {
+    _useTallTestViewport(tester);
+    final controller = await _createController();
+    final group = await controller.addCustomGroup(
+      name: 'Picnic Picker',
+      emoji: '📍',
+      choices: ['Park', 'Beach'],
+    );
+
+    await tester.pumpWidget(DecisionMakerApp(controller: controller));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Picnic Picker'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byTooltip('Edit picker'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Edit Picker'), findsOneWidget);
+
+    await tester.enterText(
+      find.byKey(const ValueKey('group-name-input')),
+      'Dinner Picker',
+    );
+    await tester.enterText(find.byKey(const ValueKey('choice-input-0')), 'Pho');
+    await tester.enterText(
+      find.byKey(const ValueKey('choice-input-1')),
+      'Ramen',
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.widgetWithText(FilledButton, 'Save changes'));
+    await tester.pumpAndSettle();
+
+    final updatedGroup = controller.findById(group.id);
+    expect(updatedGroup?.name, 'Dinner Picker');
+    expect(updatedGroup?.choices, ['Pho', 'Ramen']);
+    expect(find.text('Dinner Picker'), findsOneWidget);
+
+    controller.dispose();
+  });
+
+  test('edit picker saves a predefined picker override', () async {
+    SharedPreferences.setMockInitialValues({});
+    final preferences = await SharedPreferences.getInstance();
+    final controller = DecisionGroupsController(
+      repository: DecisionRepository(
+        storage: LocalDecisionStorage(preferences: preferences),
+      ),
+    );
+    await controller.loadGroups();
+
+    await controller.updateCustomGroup(
+      id: 'default-food',
+      name: 'Quick Lunch',
+      emoji: '🥗',
+      choices: ['Salad', 'Soup'],
+    );
+    controller.dispose();
+
+    final reloadedController = DecisionGroupsController(
+      repository: DecisionRepository(
+        storage: LocalDecisionStorage(preferences: preferences),
+      ),
+    );
+    await reloadedController.loadGroups();
+
+    final foodPickers = reloadedController.groups
+        .where((group) => group.id == 'default-food')
+        .toList();
+    expect(foodPickers, hasLength(1));
+    expect(foodPickers.single.name, 'Quick Lunch');
+    expect(foodPickers.single.emoji, '🥗');
+    expect(foodPickers.single.choices, ['Salad', 'Soup']);
+    expect(foodPickers.single.isDefault, isFalse);
+
+    reloadedController.dispose();
+  });
+
   testWidgets('picker details toggles choices and requires two selected', (
     tester,
   ) async {

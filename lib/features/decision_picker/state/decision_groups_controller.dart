@@ -67,6 +67,34 @@ class DecisionGroupsController extends ChangeNotifier {
     return group;
   }
 
+  Future<DecisionGroup?> updateCustomGroup({
+    required String id,
+    required String name,
+    required String emoji,
+    required List<String> choices,
+  }) async {
+    final group = findById(id);
+    if (group == null) {
+      return null;
+    }
+
+    final updatedGroup = group.copyWith(
+      name: name.trim(),
+      emoji: emoji.trim().isEmpty ? '🎯' : emoji.trim(),
+      choices: _cleanChoices(choices),
+      isDefault: false,
+      updatedAt: DateTime.now(),
+    );
+
+    _groups = _groups
+        .map((candidate) => candidate.id == id ? updatedGroup : candidate)
+        .toList();
+    await _repository.saveCustomGroups(_groups);
+    await _repository.saveGroupOrder(_groups);
+    notifyListeners();
+    return updatedGroup;
+  }
+
   Future<void> deleteCustomGroup(String id) async {
     final group = findById(id);
     if (group == null || group.isDefault) {

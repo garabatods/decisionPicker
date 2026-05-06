@@ -20,14 +20,16 @@ class DecisionGroupCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final supportingText = switch (group.id) {
-      'default-food' => 'Choose a meal with less back-and-forth',
-      'default-movie-genre' => 'Pick a direction for movie night',
-      'default-truth-or-dare' => 'Choose a prompt for everyone',
-      'default-game-night' => 'Decide what to play next',
-      'default-weekend' => 'Pick an easy plan for your weekend',
-      _ => '${group.choices.length} choices',
-    };
+    final supportingText = group.isDefault
+        ? switch (group.id) {
+            'default-food' => 'Choose a meal with less back-and-forth',
+            'default-movie-genre' => 'Pick a direction for movie night',
+            'default-truth-or-dare' => 'Choose a prompt for everyone',
+            'default-game-night' => 'Decide what to play next',
+            'default-weekend' => 'Pick an easy plan for your weekend',
+            _ => '${group.choices.length} choices',
+          }
+        : '${group.choices.length} choices';
 
     return Card(
       margin: EdgeInsets.zero,
@@ -98,12 +100,7 @@ class DecisionGroupCard extends StatelessWidget {
 
   _CardPalette get _palette => _cardPalettes[colorIndex % _cardPalettes.length];
 
-  String get _displayName {
-    return switch (group.id) {
-      'default-truth-or-dare' => 'Truth or Dare',
-      _ => group.name,
-    };
-  }
+  String get _displayName => group.name;
 }
 
 class _CardPalette {

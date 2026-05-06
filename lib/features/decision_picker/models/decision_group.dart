@@ -17,6 +17,26 @@ class DecisionGroup {
     required this.updatedAt,
   });
 
+  DecisionGroup copyWith({
+    String? id,
+    String? name,
+    String? emoji,
+    List<String>? choices,
+    bool? isDefault,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return DecisionGroup(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      emoji: emoji ?? this.emoji,
+      choices: choices ?? this.choices,
+      isDefault: isDefault ?? this.isDefault,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,

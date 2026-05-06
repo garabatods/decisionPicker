@@ -47,7 +47,14 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
     final canStart = selectedChoices.length >= 2;
 
     return Scaffold(
-      appBar: const BrandTopBar(showBack: true),
+      appBar: BrandTopBar(
+        showBack: true,
+        trailing: IconButton(
+          tooltip: 'Edit picker',
+          onPressed: () => context.push('/edit/${group.id}'),
+          icon: const Icon(Icons.edit_outlined),
+        ),
+      ),
       bottomNavigationBar: SafeArea(
         top: false,
         child: Container(
