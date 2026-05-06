@@ -145,6 +145,25 @@ class DecisionGroupsController extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<DecisionGroup> addSharedPicker(DecisionGroup sharedPicker) async {
+    final now = DateTime.now();
+    final group = DecisionGroup(
+      id: 'custom-${now.microsecondsSinceEpoch}',
+      name: sharedPicker.name,
+      emoji: sharedPicker.emoji,
+      choices: sharedPicker.choices,
+      isDefault: false,
+      createdAt: now,
+      updatedAt: now,
+    );
+
+    _groups = [group, ..._groups];
+    await _repository.saveCustomGroups(_groups);
+    await _repository.saveGroupOrder(_groups);
+    notifyListeners();
+    return group;
+  }
+
   static List<String> _cleanChoices(List<String> choices) {
     final seen = <String>{};
     final cleaned = <String>[];

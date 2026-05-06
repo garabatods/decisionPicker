@@ -7,6 +7,7 @@ import '../../../../core/theme/app_spacing.dart';
 import '../models/decision_group.dart';
 import '../widgets/brand_top_bar.dart';
 import '../widgets/empty_state.dart';
+import '../widgets/share_picker_dialog.dart';
 
 class GroupDetailsScreen extends StatefulWidget {
   const GroupDetailsScreen({super.key, required this.groupId});
@@ -51,10 +52,20 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
     return Scaffold(
       appBar: BrandTopBar(
         showBack: true,
-        trailing: IconButton(
-          tooltip: 'Edit picker',
-          onPressed: () => context.push('/edit/${group.id}'),
-          icon: const Icon(Icons.edit_outlined),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              tooltip: 'Share picker',
+              onPressed: () => _showShareDialog(context, group),
+              icon: const Icon(Icons.share_outlined),
+            ),
+            IconButton(
+              tooltip: 'Edit picker',
+              onPressed: () => context.push('/edit/${group.id}'),
+              icon: const Icon(Icons.edit_outlined),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: SafeArea(
@@ -156,6 +167,13 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
         _selectedChoices.add(choice);
       }
     });
+  }
+
+  void _showShareDialog(BuildContext context, DecisionGroup group) {
+    showDialog(
+      context: context,
+      builder: (context) => SharePickerDialog(picker: group),
+    );
   }
 }
 

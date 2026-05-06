@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:app_links/app_links.dart';
 
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_controller.dart';
+import 'features/decision_picker/models/decision_group.dart';
+import 'features/decision_picker/screens/add_shared_picker_screen.dart';
 import 'features/decision_picker/screens/ai_assistant_screen.dart';
 import 'features/decision_picker/screens/create_picker_screen.dart';
 import 'features/decision_picker/screens/group_details_screen.dart';
@@ -10,6 +13,7 @@ import 'features/decision_picker/screens/history_screen.dart';
 import 'features/decision_picker/screens/home_screen.dart';
 import 'features/decision_picker/screens/picker_screen.dart';
 import 'features/decision_picker/screens/settings_screen.dart';
+import 'features/decision_picker/services/share_service.dart';
 import 'features/decision_picker/state/decision_groups_controller.dart';
 
 class DecisionMakerApp extends StatefulWidget {
@@ -27,6 +31,7 @@ class DecisionMakerApp extends StatefulWidget {
 }
 
 class _DecisionMakerAppState extends State<DecisionMakerApp> {
+  late final AppLinks _appLinks = AppLinks();
   late final GoRouter _router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
@@ -75,6 +80,26 @@ class _DecisionMakerAppState extends State<DecisionMakerApp> {
             filteredChoices: filteredChoices,
           );
         },
+      ),      GoRoute(
+        path: '/add-shared-picker',
+        builder: (context, state) {
+          final picker = state.extra as DecisionGroup?;
+          if (picker == null) {
+            return const Scaffold(
+              body: Center(child: Text('Invalid picker data')),
+            );
+          }
+          return AddSharedPickerScreen(picker: picker);
+        },
+      ),      GoRoute(
+        path: '/add-shared-picker',
+        builder: (context, state) {
+          final extra = state.extra;
+          if (extra is DecisionGroup) {
+            return AddSharedPickerScreen(picker: extra);
+          }
+          return const HomeScreen(); // fallback
+        },
       ),
     ],
   );
@@ -85,6 +110,8 @@ class _DecisionMakerAppState extends State<DecisionMakerApp> {
   void initState() {
     super.initState();
     widget.themeController.addListener(_onThemeChanged);
+    _appLinks.uriLinkStream.listen(_handleDeepLink);
+    _handleInitialLink();
   }
 
   @override
@@ -100,6 +127,34 @@ class _DecisionMakerAppState extends State<DecisionMakerApp> {
   void dispose() {
     widget.themeController.removeListener(_onThemeChanged);
     super.dispose();
+  }
+
+  Future<void> _handleInitialLink() async {
+    final uri = await _appLinks.getInitialLink();
+    print('Initial link: $uri');
+    if (uri != null) {
+      // Wait for the first frame to ensure the app is fully initialized
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _handleDeepLink(uri);
+      });
+    }
+  }
+
+  void _handleDeepLink(Uri uri) {
+    print('Handling deep link: $uri');
+    final picker = ShareService.decodeUrlToPicker(uri.toString());
+    print('Decoded picker: $picker');
+    if (picker != null) {
+      print('About to navigate to add-shared-picker');
+      try {
+        _router.go('/add-shared-picker', extra: picker);
+        print('Navigation successful');
+      } catch (e) {
+        print('Navigation error: $e');
+      }
+    } else {
+      print('Picker decoding failed');
+    }
   }
 
   @override
