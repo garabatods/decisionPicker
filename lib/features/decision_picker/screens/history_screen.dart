@@ -17,6 +17,15 @@ class HistoryScreen extends StatelessWidget {
     return AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
+        final theme = Theme.of(context);
+        final isDark = theme.brightness == Brightness.dark;
+        final cardColor = isDark
+            ? theme.colorScheme.surfaceContainerHigh
+            : Colors.white;
+        final shadowColor = isDark
+            ? Colors.black.withValues(alpha: 0.18)
+            : AppColors.primary.withValues(alpha: 0.08);
+
         return Scaffold(
           appBar: const BrandTopBar(showBack: true),
           bottomNavigationBar: const DecisionBottomNav(
@@ -43,7 +52,10 @@ class HistoryScreen extends StatelessWidget {
                           Text(
                             'Recent',
                             style: Theme.of(context).textTheme.bodyMedium
-                                ?.copyWith(color: AppColors.primary),
+                                ?.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ],
                       ),
@@ -54,13 +66,11 @@ class HistoryScreen extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: cardColor,
                               borderRadius: BorderRadius.circular(24),
                               boxShadow: [
                                 BoxShadow(
-                                  color: AppColors.primary.withValues(
-                                    alpha: 0.08,
-                                  ),
+                                  color: shadowColor,
                                   blurRadius: 22,
                                   offset: const Offset(0, 8),
                                 ),
@@ -96,9 +106,14 @@ class HistoryScreen extends StatelessWidget {
                                       const SizedBox(height: 4),
                                       Text(
                                         item.choice,
-                                        style: Theme.of(
-                                          context,
-                                        ).textTheme.headlineMedium,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineMedium
+                                            ?.copyWith(
+                                              color: isDark
+                                                  ? Colors.white
+                                                  : AppColors.textPrimary,
+                                            ),
                                       ),
                                     ],
                                   ),

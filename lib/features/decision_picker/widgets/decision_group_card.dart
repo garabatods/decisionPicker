@@ -67,15 +67,20 @@ class DecisionGroupCard extends StatelessWidget {
                       _displayName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.headlineMedium
-                          ?.copyWith(fontSize: 21, height: 1.16),
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontSize: 21,
+                        height: 1.16,
+                        color: AppColors.textPrimary,
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.xxs),
                     Text(
                       supportingText,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ],
                 ),

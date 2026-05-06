@@ -7,6 +7,7 @@ import '../../../../core/theme/app_spacing.dart';
 import '../models/decision_group.dart';
 import '../widgets/brand_top_bar.dart';
 import '../widgets/empty_state.dart';
+import '../widgets/share_picker_dialog.dart';
 
 class GroupDetailsScreen extends StatefulWidget {
   const GroupDetailsScreen({super.key, required this.groupId});
@@ -45,14 +46,26 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
         .where(_selectedChoices.contains)
         .toList();
     final canStart = selectedChoices.length >= 2;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: BrandTopBar(
         showBack: true,
-        trailing: IconButton(
-          tooltip: 'Edit picker',
-          onPressed: () => context.push('/edit/${group.id}'),
-          icon: const Icon(Icons.edit_outlined),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              tooltip: 'Share picker',
+              onPressed: () => _showShareDialog(context, group),
+              icon: const Icon(Icons.share_outlined),
+            ),
+            IconButton(
+              tooltip: 'Edit picker',
+              onPressed: () => context.push('/edit/${group.id}'),
+              icon: const Icon(Icons.edit_outlined),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: SafeArea(
@@ -60,11 +73,15 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
         child: Container(
           padding: const EdgeInsets.fromLTRB(24, 12, 24, 18),
           decoration: BoxDecoration(
-            color: AppColors.background.withValues(alpha: 0.96),
+            color: isDark
+                ? theme.colorScheme.surface
+                : AppColors.background.withValues(alpha: 0.96),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
-                blurRadius: 18,
+                color: isDark
+                    ? Colors.black.withValues(alpha: 0.12)
+                    : Colors.black.withValues(alpha: 0.05),
+                blurRadius: 16,
                 offset: const Offset(0, -8),
               ),
             ],
@@ -73,14 +90,26 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               FilledButton.icon(
+                style: isDark
+                    ? FilledButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        foregroundColor: Colors.white,
+                      )
+                    : null,
                 onPressed: canStart
                     ? () => context.push(
                         '/picker/${group.id}',
                         extra: selectedChoices,
                       )
                     : null,
-                icon: const Icon(Icons.casino),
-                label: const Text('Start picking'),
+                icon: Icon(
+                  Icons.casino,
+                  color: isDark ? Colors.white : null,
+                ),
+                label: Text(
+                  'Start picking',
+                  style: isDark ? const TextStyle(color: Colors.white) : null,
+                ),
               ),
               if (!canStart) ...[
                 const SizedBox(height: AppSpacing.xs),
@@ -139,6 +168,13 @@ class _GroupDetailsScreenState extends State<GroupDetailsScreen> {
       }
     });
   }
+
+  void _showShareDialog(BuildContext context, DecisionGroup group) {
+    showDialog(
+      context: context,
+      builder: (context) => SharePickerDialog(picker: group),
+    );
+  }
 }
 
 class _PickerDetailsHeader extends StatelessWidget {
@@ -170,7 +206,11 @@ class _PickerDetailsHeader extends StatelessWidget {
               const SizedBox(height: AppSpacing.xxs),
               Text(
                 '$selectedCount of $totalCount choices selected',
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.72)
+                          : AppColors.textSecondary,
+                    ),
               ),
             ],
           ),
@@ -180,8 +220,10 @@ class _PickerDetailsHeader extends StatelessWidget {
           width: 78,
           height: 78,
           alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: AppColors.secondaryContainer,
+          decoration: BoxDecoration(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? const Color(0xFF0F322C)
+                : AppColors.secondaryContainer,
             shape: BoxShape.circle,
           ),
           child: Text(
@@ -211,7 +253,9 @@ class _ChoiceToggleRow extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppSpacing.sm),
       child: Material(
         key: ValueKey('choice-toggle-$choice'),
-        color: Colors.white.withValues(alpha: isSelected ? 1 : 0.58),
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Theme.of(context).colorScheme.surfaceContainerHighest
+            : Colors.white,
         borderRadius: BorderRadius.circular(20),
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
@@ -224,7 +268,11 @@ class _ChoiceToggleRow extends StatelessWidget {
                   isSelected
                       ? Icons.check_circle
                       : Icons.radio_button_unchecked,
-                  color: isSelected ? AppColors.secondary : AppColors.outline,
+                  color: isSelected
+                      ? AppColors.secondary
+                      : Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.6)
+                          : AppColors.outline,
                 ),
                 const SizedBox(width: AppSpacing.sm),
                 Expanded(
@@ -232,8 +280,12 @@ class _ChoiceToggleRow extends StatelessWidget {
                     choice,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: isSelected
-                          ? AppColors.textPrimary
-                          : AppColors.outline,
+                          ? (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : AppColors.textPrimary)
+                          : Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white.withValues(alpha: 0.75)
+                              : AppColors.outline,
                     ),
                   ),
                 ),

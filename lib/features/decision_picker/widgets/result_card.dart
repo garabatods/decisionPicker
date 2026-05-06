@@ -27,6 +27,9 @@ class _ResultCardState extends State<ResultCard>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return AnimatedBuilder(
       animation: _controller,
       builder: (context, child) {
@@ -34,12 +37,19 @@ class _ResultCardState extends State<ResultCard>
           width: double.infinity,
           padding: const EdgeInsets.fromLTRB(24, 30, 24, 32),
           decoration: BoxDecoration(
-            color: AppColors.result,
+            color: isDark ? theme.colorScheme.surface : AppColors.result,
             borderRadius: BorderRadius.circular(32),
-            border: Border.all(color: const Color(0xFFFFC857), width: 2),
+            border: Border.all(
+              color: isDark
+                  ? AppColors.primary.withValues(alpha: 0.24)
+                  : const Color(0xFFFFC857),
+              width: 2,
+            ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFFFC857).withValues(alpha: 0.22),
+                color: isDark
+                    ? AppColors.primary.withValues(alpha: 0.12)
+                    : const Color(0xFFFFC857).withValues(alpha: 0.22),
                 blurRadius: 28,
                 offset: const Offset(0, 12),
               ),
@@ -100,12 +110,18 @@ class _ResultCardState extends State<ResultCard>
       },
       child: Column(
         children: [
-          const Icon(Icons.auto_awesome, color: AppColors.primary, size: 34),
+          Icon(
+            Icons.auto_awesome,
+            color: isDark ? Colors.white : AppColors.primary,
+            size: 34,
+          ),
           const SizedBox(height: AppSpacing.sm),
           Text(
             'Picked',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary,
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.75)
+                  : AppColors.textSecondary,
               fontWeight: FontWeight.w700,
             ),
           ),
@@ -117,6 +133,7 @@ class _ResultCardState extends State<ResultCard>
               fontSize: 28,
               height: 1.18,
               fontWeight: FontWeight.w900,
+              color: isDark ? Colors.white : null,
             ),
           ),
         ],

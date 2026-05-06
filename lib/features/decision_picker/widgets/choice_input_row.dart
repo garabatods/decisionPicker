@@ -30,6 +30,7 @@ class ChoiceInputRow extends StatelessWidget {
               key: ValueKey('choice-input-$index'),
               controller: controller,
               focusNode: focusNode,
+              textCapitalization: TextCapitalization.sentences,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(labelText: 'Choice ${index + 1}'),
             ),

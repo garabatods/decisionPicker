@@ -102,6 +102,9 @@ class _SlotPickerViewState extends State<SlotPickerView>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     if (widget.choices.isEmpty) {
       return const SizedBox(
         height: _height,
@@ -113,12 +116,18 @@ class _SlotPickerViewState extends State<SlotPickerView>
       height: _height,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainer,
+        color: isDark ? theme.colorScheme.surface : AppColors.surfaceContainer,
         borderRadius: BorderRadius.circular(32),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.72)),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.08)
+              : Colors.white.withValues(alpha: 0.72),
+        ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.08),
+            color: isDark
+                ? Colors.black.withValues(alpha: 0.16)
+                : AppColors.primary.withValues(alpha: 0.08),
             blurRadius: 32,
             offset: const Offset(0, 12),
           ),
@@ -131,12 +140,18 @@ class _SlotPickerViewState extends State<SlotPickerView>
             height: _itemHeight,
             margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.42),
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.white.withValues(alpha: 0.42),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.primary, width: 3),
+              border: Border.all(
+                color: AppColors.primary.withValues(alpha: isDark ? 0.42 : 1),
+                width: 3,
+              ),
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.16),
+                  color: AppColors.primary.withValues(
+                      alpha: isDark ? 0.12 : 0.16),
                   blurRadius: 24,
                   offset: const Offset(0, 8),
                 ),
@@ -180,10 +195,18 @@ class _SlotPickerViewState extends State<SlotPickerView>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.surfaceContainer,
-                    AppColors.surfaceContainer.withValues(alpha: 0),
-                    AppColors.surfaceContainer.withValues(alpha: 0),
-                    AppColors.surfaceContainer,
+                    isDark
+                        ? theme.colorScheme.surface
+                        : AppColors.surfaceContainer,
+                    isDark
+                        ? theme.colorScheme.surface.withValues(alpha: 0)
+                        : AppColors.surfaceContainer.withValues(alpha: 0),
+                    isDark
+                        ? theme.colorScheme.surface.withValues(alpha: 0)
+                        : AppColors.surfaceContainer.withValues(alpha: 0),
+                    isDark
+                        ? theme.colorScheme.surface
+                        : AppColors.surfaceContainer,
                   ],
                   stops: const [0, 0.22, 0.78, 1],
                 ),
@@ -226,9 +249,11 @@ class _SlotChoice extends StatelessWidget {
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 120),
           style: TextStyle(
-            color: AppColors.textPrimary.withValues(
-              alpha: isSelected ? 1 : 0.48,
-            ),
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white.withValues(alpha: isSelected ? 1 : 0.55)
+                : AppColors.textPrimary.withValues(
+                    alpha: isSelected ? 1 : 0.48,
+                  ),
             fontSize: isSelected ? 28 : 19,
             fontWeight: isSelected ? FontWeight.w900 : FontWeight.w700,
             letterSpacing: 0,
