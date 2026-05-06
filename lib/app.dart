@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_controller.dart';
 import 'features/decision_picker/screens/ai_assistant_screen.dart';
 import 'features/decision_picker/screens/create_picker_screen.dart';
 import 'features/decision_picker/screens/group_details_screen.dart';
@@ -12,9 +13,14 @@ import 'features/decision_picker/screens/settings_screen.dart';
 import 'features/decision_picker/state/decision_groups_controller.dart';
 
 class DecisionMakerApp extends StatefulWidget {
-  const DecisionMakerApp({super.key, required this.controller});
+  const DecisionMakerApp({
+    super.key,
+    required this.controller,
+    required this.themeController,
+  });
 
   final DecisionGroupsController controller;
+  final ThemeController themeController;
 
   @override
   State<DecisionMakerApp> createState() => _DecisionMakerAppState();
@@ -45,7 +51,9 @@ class _DecisionMakerAppState extends State<DecisionMakerApp> {
       ),
       GoRoute(
         path: '/settings',
-        builder: (context, state) => const SettingsScreen(),
+        builder: (context, state) => SettingsScreen(
+          themeController: widget.themeController,
+        ),
       ),
       GoRoute(
         path: '/group/:id',
@@ -71,6 +79,29 @@ class _DecisionMakerAppState extends State<DecisionMakerApp> {
     ],
   );
 
+  void _onThemeChanged() => setState(() {});
+
+  @override
+  void initState() {
+    super.initState();
+    widget.themeController.addListener(_onThemeChanged);
+  }
+
+  @override
+  void didUpdateWidget(covariant DecisionMakerApp oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.themeController != widget.themeController) {
+      oldWidget.themeController.removeListener(_onThemeChanged);
+      widget.themeController.addListener(_onThemeChanged);
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.themeController.removeListener(_onThemeChanged);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return DecisionGroupsScope(
@@ -79,6 +110,8 @@ class _DecisionMakerAppState extends State<DecisionMakerApp> {
         title: 'Pickers',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: widget.themeController.themeMode,
         routerConfig: _router,
       ),
     );

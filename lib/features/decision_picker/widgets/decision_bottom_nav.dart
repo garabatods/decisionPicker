@@ -13,15 +13,24 @@ class DecisionBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final backgroundColor = isDark
+        ? theme.colorScheme.surface
+        : Colors.white.withValues(alpha: 0.94);
+    final shadowColor = isDark
+        ? Colors.black.withValues(alpha: 0.18)
+        : Colors.black.withValues(alpha: 0.04);
+
     return Container(
       height: AppSpacing.navHeight,
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 18),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.94),
+        color: backgroundColor,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
+            color: shadowColor,
             blurRadius: 20,
             offset: const Offset(0, -8),
           ),
@@ -75,7 +84,13 @@ class _NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = selected ? AppColors.primary : Colors.blueGrey.shade300;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final activeColor = AppColors.primary;
+    final inactiveColor = isDark
+        ? Colors.white.withValues(alpha: 0.72)
+        : Colors.blueGrey.shade300;
+    final color = selected ? activeColor : inactiveColor;
 
     return InkResponse(
       onTap: onTap,

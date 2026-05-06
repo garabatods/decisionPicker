@@ -84,6 +84,8 @@ class _PickerScreenState extends State<PickerScreen> {
     final choices = _activeChoices(group);
     final effectiveStatus = choices.length < 2 ? PickerStatus.invalid : _status;
     final isSpinning = effectiveStatus == PickerStatus.spinning;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       appBar: const BrandTopBar(showBack: true),
@@ -92,10 +94,14 @@ class _PickerScreenState extends State<PickerScreen> {
         child: Container(
           padding: const EdgeInsets.fromLTRB(24, 12, 24, 18),
           decoration: BoxDecoration(
-            color: AppColors.background.withValues(alpha: 0.96),
+            color: isDark
+                ? theme.colorScheme.surface
+                : AppColors.background.withValues(alpha: 0.96),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.05),
+                color: isDark
+                    ? Colors.black.withValues(alpha: 0.16)
+                    : Colors.black.withValues(alpha: 0.05),
                 blurRadius: 18,
                 offset: const Offset(0, -8),
               ),
@@ -109,14 +115,22 @@ class _PickerScreenState extends State<PickerScreen> {
                     ? null
                     : () => _pick(group, choices),
                 style: FilledButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: AppColors.onPrimary,
+                  backgroundColor:
+                      isDark ? AppColors.primary : AppColors.primary,
+                  foregroundColor: isDark ? Colors.white : AppColors.onPrimary,
                   minimumSize: const Size.fromHeight(58),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
+                  ),
                 ),
                 child: Text(
                   effectiveStatus == PickerStatus.result
                       ? 'Pick again'
                       : 'Pick for me',
+                  style: TextStyle(
+                    color: isDark ? Colors.white : null,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               const SizedBox(height: AppSpacing.sm),
@@ -124,15 +138,28 @@ class _PickerScreenState extends State<PickerScreen> {
                 onPressed: isSpinning ? null : () => context.go('/'),
                 style: OutlinedButton.styleFrom(
                   minimumSize: const Size.fromHeight(54),
-                  backgroundColor: AppColors.surfaceContainerLow,
-                  side: BorderSide.none,
+                  backgroundColor: isDark
+                      ? theme.colorScheme.surfaceContainerHighest
+                      : AppColors.surfaceContainerLow,
+                  foregroundColor: isDark ? AppColors.primary : null,
+                  side: isDark
+                      ? BorderSide(
+                          color: AppColors.primary.withValues(alpha: 0.24),
+                        )
+                      : BorderSide.none,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                       AppSpacing.buttonRadius,
                     ),
                   ),
                 ),
-                child: const Text('Back to pickers'),
+                child: Text(
+                  'Back to pickers',
+                  style: TextStyle(
+                    color: isDark ? AppColors.primary : null,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
               ),
             ],
           ),
@@ -226,10 +253,21 @@ class _PickerHeader extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(
                   context,
-                ).textTheme.headlineMedium?.copyWith(color: AppColors.tertiary),
+                ).textTheme.headlineMedium?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xFF4ED6C9)
+                          : AppColors.tertiary,
+                    ),
               ),
               const SizedBox(height: AppSpacing.xxs),
-              Text(_statusText, style: Theme.of(context).textTheme.bodyLarge),
+              Text(
+                _statusText,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white.withValues(alpha: 0.85)
+                          : null,
+                    ),
+              ),
             ],
           ),
         ),
@@ -238,8 +276,10 @@ class _PickerHeader extends StatelessWidget {
           width: 70,
           height: 70,
           alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: AppColors.secondaryContainer,
+          decoration: BoxDecoration(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? const Color(0xFF4DD9CC)
+                : AppColors.secondaryContainer,
             shape: BoxShape.circle,
           ),
           child: Text(

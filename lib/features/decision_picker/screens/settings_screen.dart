@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/theme/theme_controller.dart';
 import '../widgets/brand_top_bar.dart';
 import '../widgets/decision_bottom_nav.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({
+    super.key,
+    required this.themeController,
+  });
+
+  final ThemeController themeController;
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -14,7 +20,33 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _sound = true;
-  bool _darkMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.themeController.addListener(_onThemeChanged);
+  }
+
+  @override
+  void didUpdateWidget(covariant SettingsScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.themeController != widget.themeController) {
+      oldWidget.themeController.removeListener(_onThemeChanged);
+      widget.themeController.addListener(_onThemeChanged);
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.themeController.removeListener(_onThemeChanged);
+    super.dispose();
+  }
+
+  void _onThemeChanged() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +82,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               icon: Icons.dark_mode,
               title: 'Dark mode',
               trailing: Switch(
-                value: _darkMode,
-                onChanged: (value) => setState(() => _darkMode = value),
+                value: widget.themeController.isDarkMode,
+                onChanged: (value) => widget.themeController.setDarkMode(value),
               ),
             ),
             _SettingsTile(
@@ -130,7 +162,7 @@ class _SettingsTile extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.sm),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(22),
       ),
       child: Row(
