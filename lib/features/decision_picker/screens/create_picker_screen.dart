@@ -432,13 +432,13 @@ class _FormSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 18, 20, 20),
       decoration: BoxDecoration(
-        color: isDark ? theme.colorScheme.surface : Colors.white,
+        color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
         boxShadow: [
           BoxShadow(
             color: isDark
                 ? Colors.black.withOpacity(0.24)
-                : AppColors.primary.withValues(alpha: 0.05),
+                : theme.colorScheme.primary.withOpacity(0.05),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -576,15 +576,15 @@ class _FocusedTextFieldState extends State<_FocusedTextField> {
           curve: Curves.easeOut,
           decoration: BoxDecoration(
             color: isDark
-                ? theme.colorScheme.surfaceVariant
-                : AppColors.surfaceContainerLow,
+                ? theme.colorScheme.surfaceContainerHighest
+                : theme.colorScheme.surfaceContainerLow,
             borderRadius: BorderRadius.circular(AppSpacing.inputRadius),
             border: Border.all(
               color: isFocused
-                  ? AppColors.primary
+                  ? theme.colorScheme.primary
                   : isDark
-                      ? Colors.white.withOpacity(0.06)
-                      : AppColors.border,
+                      ? theme.colorScheme.onSurface.withOpacity(0.06)
+                      : theme.colorScheme.outline,
               width: isFocused ? 2 : 0,
             ),
             boxShadow: isFocused
@@ -650,13 +650,13 @@ class _InlineFieldMessage extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 170),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: AppColors.danger.withValues(alpha: 0.08),
+        color: Theme.of(context).colorScheme.errorContainer,
         borderRadius: BorderRadius.circular(999),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.info_outline, size: 13, color: AppColors.danger),
+          Icon(Icons.info_outline, size: 13, color: Theme.of(context).colorScheme.error),
           const SizedBox(width: 4),
           Flexible(
             child: Text(
@@ -664,7 +664,7 @@ class _InlineFieldMessage extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.danger,
+                color: Theme.of(context).colorScheme.onErrorContainer,
                 fontSize: 12,
                 fontWeight: FontWeight.w800,
                 height: 1.1,
@@ -685,12 +685,11 @@ class _SectionLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
 
     return Text(
       text,
       style: theme.textTheme.bodyMedium?.copyWith(
-        color: isDark ? Colors.white : AppColors.textPrimary,
+        color: theme.colorScheme.onSurface,
         fontSize: 13,
         fontWeight: FontWeight.w900,
         letterSpacing: 0.4,
@@ -717,8 +716,8 @@ class _IconChoice extends StatelessWidget {
 
     return Material(
       color: isDark
-          ? theme.colorScheme.surfaceVariant
-          : AppColors.surfaceContainer,
+          ? theme.colorScheme.surfaceContainerHighest
+          : theme.colorScheme.surfaceContainer,
       borderRadius: BorderRadius.circular(16),
       child: InkWell(
         onTap: onTap,
@@ -730,15 +729,15 @@ class _IconChoice extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             color: isDark
-                ? theme.colorScheme.surfaceVariant
+                ? theme.colorScheme.surfaceContainerHighest
                 : null,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: isSelected
-                  ? AppColors.primary
+                  ? theme.colorScheme.primary
                   : isDark
-                      ? Colors.white.withOpacity(0.08)
-                      : AppColors.border,
+                      ? theme.colorScheme.onSurface.withOpacity(0.08)
+                      : theme.colorScheme.outline,
               width: isSelected ? 2 : 0,
             ),
           ),
@@ -747,7 +746,7 @@ class _IconChoice extends StatelessWidget {
             style: TextStyle(
               fontSize: 22,
               letterSpacing: 0,
-              color: isDark ? Colors.white : null,
+              color: theme.colorScheme.onSurface,
             ),
           ),
         ),
@@ -771,13 +770,13 @@ class _FutureIconButton extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: isDark
-              ? theme.colorScheme.surfaceVariant
-              : AppColors.surfaceContainer,
+              ? theme.colorScheme.surfaceContainerHighest
+              : theme.colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Icon(
           Icons.add,
-          color: isDark ? Colors.white.withOpacity(0.72) : AppColors.textSecondary,
+          color: theme.colorScheme.onSurfaceVariant,
         ),
       ),
     );
